@@ -1,11 +1,12 @@
 {
   "name": "Messenger Ninja",
   "description": "Hide icon & name for Messenger",
-  "version": "0.1",
+  "version": "0.2",
   "author": "akinov",
   "permissions": [
     "tabs",
-    "background"
+    "background",
+    "storage"
   ],
   "icons": {
     "128": "images/icon128.png",
@@ -35,5 +36,6 @@
       "https://www.messenger.com/*"
     ]
   },
+  "options_page": "pages/options.html",
   "manifest_version": 2
 }

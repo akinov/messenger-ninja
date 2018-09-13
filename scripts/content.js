@@ -6,11 +6,24 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 
 'use strict';
 
-let isHide = false;
-const nekoSrc = 'https://pbs.twimg.com/profile_images/424484505915621376/EOwsjaMZ_400x400.png',
-      nekoName = '猫田 猫男';
+let isHide = false,
+    dummyImgUrl = '',
+    dummyName = '';
+
+chrome.storage.sync.get(
+    {
+      dummyImgUrl: 'https://pbs.twimg.com/profile_images/424484505915621376/EOwsjaMZ_400x400.png',
+      dummyName: '猫田 猫男'
+    },
+    function(items) {
+      console.log(items);
+      dummyImgUrl = items.dummyImgUrl;
+      dummyName = items.dummyName;
+    }
+);
 
 function toggleNinja() {
+  console.log(dummyImgUrl, dummyName);
   isHide = !isHide;
 
   $('._1t2u ._4ld- > img, ._1t2u ._1jt6 img, .uiScrollableAreaContent ._55lt img').each(function() {
@@ -33,7 +46,7 @@ function toggleNinja() {
 
 function toggleImg($this) {
   if (isHide) {
-    $this.attr('src', nekoSrc);
+    $this.attr('src', dummyImgUrl);
   } else {
     $this.attr('src', $this.attr('origin-src'));
   }
@@ -41,7 +54,7 @@ function toggleImg($this) {
 
 function toggleText($this) {
   if (isHide) {
-    $this.text(nekoName);
+    $this.text(dummyName);
   } else {
     $this.text($this.attr('origin-text'));
   }
